@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cartilla Acreditación FALP</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --azul:     #0d3b6e;
+    --azul-med: #1a5fa8;
+    --celeste:  #3a9bd5;
+    --rojo:     #d63031;
+    --naranja:  #e17055;
+    --verde:    #00875a;
+    --amarillo: #f9ca24;
+    --blanco:   #f8fafc;
+    --gris:     #e2e8f0;
+    --texto:    #1e293b;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--azul);
+    color: var(--texto);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: linear-gradient(135deg, #0a2d56 0%, #1a5fa8 100%);
+    padding: 28px 32px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      45deg, transparent, transparent 18px,
+      rgba(255,255,255,.03) 18px, rgba(255,255,255,.03) 36px);
+  }
+  header h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.4rem, 4vw, 2.2rem);
+    color: #fff;
+    letter-spacing: -0.5px;
+    position: relative;
+  }
+  header p {
+    color: rgba(255,255,255,.65);
+    font-size: .9rem;
+    margin-top: 6px;
+    position: relative;
+  }
+  .badge {
+    display: inline-block;
+    background: var(--rojo);
+    color: #fff;
+    font-size: .72rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    position: relative;
+  }
+
+  /* ── NAV TABS ── */
+  nav {
+    display: flex;
+    gap: 6px;
+    padding: 16px 20px;
+    overflow-x: auto;
+    background: #0a2d56;
+    scrollbar-width: none;
+  }
+  nav::-webkit-scrollbar { display: none; }
+  .tab {
+    flex-shrink: 0;
+    padding: 8px 16px;
+    border-radius: 30px;
+    border: 2px solid rgba(255,255,255,.2);
+    background: transparent;
+    color: rgba(255,255,255,.7);
+    font-family: 'DM Sans', sans-serif;
+    font-size: .82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .25s;
+    white-space: nowrap;
+  }
+  .tab:hover { border-color: var(--celeste); color: #fff; }
+  .tab.active {
+    background: var(--celeste);
+    border-color: var(--celeste);
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(58,155,213,.4);
+  }
+
+  /* ── MAIN CONTENT ── */
+  main {
+    padding: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .section { display: none; animation: fadeUp .35s ease; }
+  .section.active { display: block; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SECTION TITLE ── */
+  .sec-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.5rem;
+    color: #fff;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .sec-icon {
+    width: 42px; height: 42px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+  }
+
+  /* ── CARDS GRID ── */
+  .grid { display: grid; gap: 14px; }
+  .grid-2 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+
+  .card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 20px 22px;
+    box-shadow: 0 4px 20px rgba(0,0,0,.18);
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 5px; height: 100%;
+    border-radius: 16px 0 0 16px;
+  }
+  .card.azul::before   { background: var(--azul-med); }
+  .card.rojo::before   { background: var(--rojo); }
+  .card.verde::before  { background: var(--verde); }
+  .card.naranja::before{ background: var(--naranja); }
+  .card.amarillo::before{ background: var(--amarillo); }
+  .card.celeste::before { background: var(--celeste); }
+
+  .card-label {
+    font-size: .72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .8px;
+    margin-bottom: 8px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    display: inline-block;
+  }
+  .card.azul .card-label    { background: #dbeafe; color: var(--azul-med); }
+  .card.rojo .card-label    { background: #fee2e2; color: var(--rojo); }
+  .card.verde .card-label   { background: #d1fae5; color: var(--verde); }
+  .card.naranja .card-label { background: #ffedd5; color: #c05621; }
+  .card.amarillo .card-label{ background: #fef9c3; color: #854d0e; }
+  .card.celeste .card-label { background: #e0f2fe; color: #0369a1; }
+
+  .card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    color: var(--texto);
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+  .card p, .card li {
+    font-size: .88rem;
+    color: #475569;
+    line-height: 1.6;
+  }
+  .card ul { padding-left: 18px; }
+  .card ul li { margin-bottom: 4px; }
+
+  /* ── HIGHLIGHT BOX ── */
+  .highlight {
+    background: linear-gradient(135deg, #1a5fa8, #0d3b6e);
+    border-radius: 14px;
+    padding: 18px 22px;
+    color: #fff;
+    margin-bottom: 14px;
+  }
+  .highlight h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.05rem;
+    margin-bottom: 8px;
+    color: var(--amarillo);
+  }
+  .highlight p, .highlight li {
+    font-size: .88rem;
+    line-height: 1.6;
+    color: rgba(255,255,255,.88);
+  }
+  .highlight ul { padding-left: 18px; }
+
+  /* ── PREGUNTA / RESPUESTA (acordeón) ── */
+  .qa-item {
+    background: #fff;
+    border-radius: 14px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,.12);
+  }
+  .qa-q {
+    padding: 16px 20px;
+    font-weight: 600;
+    font-size: .9rem;
+    color: var(--azul);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+  }
+  .qa-q:hover { background: #f1f5f9; }
+  .qa-q .arrow {
+    transition: transform .25s;
+    font-size: 1.1rem;
+    color: var(--celeste);
+  }
+  .qa-q.open .arrow { transform: rotate(180deg); }
+  .qa-a {
+    display: none;
+    padding: 0 20px 16px;
+    font-size: .87rem;
+    color: #475569;
+    line-height: 1.7;
+    border-top: 1px solid #e2e8f0;
+    padding-top: 14px;
+  }
+  .qa-a.visible { display: block; }
+  .qa-a strong { color: var(--azul); }
+  .qa-a ul { padding-left: 18px; margin-top: 6px; }
+
+  /* ── STEPS ── */
+  .steps { display: flex; flex-direction: column; gap: 10px; }
+  .step {
+    display: flex;
+    gap: 14px;
+    background: #fff;
+    border-radius: 14px;
+    padding: 16px 18px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.1);
+    align-items: flex-start;
+  }
+  .step-num {
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: var(--celeste);
+    color: #fff;
+    font-family: 'Syne', sans-serif;
+    font-size: .95rem;
+    font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .step-num.rojo { background: var(--rojo); }
+  .step-num.verde { background: var(--verde); }
+  .step p { font-size: .88rem; color: #475569; line-height: 1.6; }
+  .step strong { color: var(--texto); }
+
+  /* ── PILL TAGS ── */
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .tag {
+    background: #e0f2fe;
+    color: #0369a1;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: .8rem;
+    font-weight: 600;
+  }
+  .tag.rojo { background: #fee2e2; color: var(--rojo); }
+  .tag.verde { background: #d1fae5; color: var(--verde); }
+  .tag.naranja { background: #ffedd5; color: #c05621; }
+
+  /* ── PROGRESS BAR ── */
+  .progress-bar {
+    background: rgba(255,255,255,.15);
+    border-radius: 8px;
+    height: 6px;
+    margin-top: 8px;
+  }
+  .progress-fill {
+    height: 100%;
+    border-radius: 8px;
+    background: var(--celeste);
+    transition: width .5s ease;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 24px;
+    color: rgba(255,255,255,.4);
+    font-size: .8rem;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 480px) {
+    nav { padding: 12px; }
+    main { padding: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="badge">🏥 FALP · Acreditación 2026</div>
+  <h1>Cartilla de Estudio</h1>
+  <p>Resumen interactivo · Toca cada tema para explorar</p>
+</header>
+
+<nav>
+  <button class="tab active" onclick="showTab('evacuacion')">🚨 Evacuación</button>
+  <button class="tab" onclick="showTab('citotoxicos')">⚗️ Citotóxicos</button>
+  <button class="tab" onclick="showTab('codigorrojo')">🔴 Código Rojo</button>
+  <button class="tab" onclick="showTab('esterilizacion')">🧼 Esterilización</button>
+  <button class="tab" onclick="showTab('reclamos')">📋 Reclamos</button>
+  <button class="tab" onclick="showTab('identificacion')">🪪 ID Paciente</button>
+</nav>
+
+<main>
+
+  <!-- ═══════════════ EVACUACIÓN ═══════════════ -->
+  <div class="section active" id="evacuacion">
+    <div class="sec-title">
+      <div class="sec-icon" style="background:#fee2e2">🚨</div>
+      Plan de Evacuación
+    </div>
+
+    <div class="grid grid-2" style="margin-bottom:14px">
+      <div class="card rojo">
+        <span class="card-label">Urgente</span>
+        <h3>Números clave</h3>
+        <ul>
+          <li><strong>Emergencias no clínicas:</strong> <span style="font-size:1.3rem;font-weight:700;color:#d63031">911</span></li>
+          <li><strong>Alarma de incendio:</strong> se avisa por <em>altoparlante</em></li>
+        </ul>
+      </div>
+      <div class="card azul">
+        <span class="card-label">Orden de Evacuación</span>
+        <h3>¿Quién da la orden?</h3>
+        <ul>
+          <li>🟢 <strong>Hábil:</strong> Subgerente de Operaciones</li>
+          <li>🔵 <strong>Inhábil:</strong> Jefe de Turno de Mantenimiento</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="highlight" style="margin-bottom:14px">
+      <h3>🅰🅱🅲🟠🟡 Claves de alarma</h3>
+      <ul>
+        <li><strong>A:</strong> Puede ser controlada por personal FALP</li>
+        <li><strong>B:</strong> Emergencia no controlable</li>
+        <li><strong>C:</strong> Evacuación total</li>
+        <li><strong>Naranja:</strong> Incendio tipo A (FALP) o tipo B (equipo externo)</li>
+        <li><strong>Amarilla:</strong> Derrames — radioactividad</li>
+      </ul>
+    </div>
+
+    <div class="sec-title" style="font-size:1.1rem;margin-top:4px">
+      <div class="sec-icon" style="background:#dcfce7;font-size:1rem">📍</div>
+      Orden y Rutas de Evacuación
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1°</div>
+        <div><p><strong>Visitas</strong> — salen primero</p></div>
+      </div>
+      <div class="step">
+        <div class="step-num">2°</div>
+        <div><p><strong>Pacientes</strong> según riesgo de caídas</p></div>
+      </div>
+      <div class="step">
+        <div class="step-num">3°</div>
+        <div><p><strong>Trabajadores</strong> — salen últimos</p></div>
+      </div>
+    </div>
+
+    <div class="card celeste" style="margin-top:14px">
+      <span class="card-label">Ruta</span>
+      <h3>¿Por dónde evacuar?</h3>
+      <p>Vías de evacuación siguiendo <strong>señalética</strong> hasta zonas seguras.</p>
+    </div>
+
+    <div class="card verde" style="margin-top:14px">
+      <span class="card-label">Áreas de Seguridad</span>
+      <h3>📍 Puntos de encuentro</h3>
+      <ul>
+        <li>Intersección Cano y Aponte – Plazoleta PDI – Plaza 19 de Junio</li>
+        <li>José Manuel Infante con Rancagua (vereda sur-oriente)</li>
+        <li>Plazoleta Roberto del Río</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ═══════════════ CITOTÓXICOS ═══════════════ -->
+  <div class="section" id="citotoxicos">
+    <div class="sec-title">
+      <div class="sec-icon" style="background:#ffedd5">⚗️</div>
+      Accidentes con Citotóxicos y Fluidos
+    </div>
+
+    <!-- Citotóxicos -->
+    <div class="card naranja" style="margin-bottom:14px">
+      <span class="card-label">Ante un derrame</span>
+      <h3>¿Qué hacer primero?</h3>
+      <ul>
+        <li>Solicitar <strong>kit anti-derrame</strong></li>
+        <li>Colocarse <strong>EPP</strong> inmediatamente</li>
+      </ul>
+    </div>
+
+    <div class="highlight" style="margin-bottom:14px">
+      <h3>⚠️ Accidente con citotóxico — pasos</h3>
+      <ul>
+        <li>Contacto en <strong>piel:</strong> lavar con agua por <strong>15 minutos</strong></li>
+        <li>Contacto <strong>ocular:</strong> irrigar con SF por <strong>15 minutos</strong></li>
+        <li>Retirar toda la ropa contaminada y dejarla en <strong>contenedor rojo</strong></li>
+      </ul>
+    </div>
+
+    <div class="grid grid-2">
+      <div class="card azul">
+        <span class="card-label">¿A quién informar?</span>
+        <h3>Notificación</h3>
+        <p>Informar a <strong>Jefatura / Supervisor</strong></p>
+        <p style="margin-top:6px">Centro de derivación: <strong>ACHS</strong></p>
+      </div>
+      <div class="card rojo">
+        <span class="card-label">Documentos para derivación</span>
+        <h3>Llevar a ACHS</h3>
+        <ul>
+          <li>Muestra fuente</li>
+          <li>Consentimiento firmado (paciente o familiar)</li>
+          <li>Carnet de Identidad</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Sangre / fluidos -->
+    <div class="sec-title" style="font-size:1.1rem;margin-top:20px">
+      <div class="sec-icon" style="background:#fee2e2;font-size:1rem">🩸</div>
+      Accidente con Sangre o Fluidos Corporales
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num rojo">1</div>
+        <div>
+          <p>Lavar inmediatamente <strong>mínimo 2 minutos</strong> con agua.</p>
+          <p style="margin-top:4px">Si es en <strong>ojo:</strong> usar suero fisiológico.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num rojo">2</div>
+        <div><p>Avisar a <strong>Jefatura / Supervisor</strong>, se deriva a ACHS.</p></div>
+      </div>
+      <div class="step">
+        <div class="step-num rojo">3</div>
+        <div><p>Tomar muestra al paciente con <strong>autorización del paciente o familia</strong> en tubo lila con anticoagulante <strong>5 cc</strong>.</p></div>
+      </div>
+      <div class="step">
+        <div class="step-num rojo">4</div>
+        <div><p>Jefatura llena <strong>DIAT</strong> e ingresa <strong>reporte SIRI</strong> dentro de las <strong>24 horas</strong>.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ CÓDIGO ROJO ═══════════════ -->
+  <div class="section" id="codigorrojo">
+    <div class="sec-title">
+      <div class="sec-icon" style="background:#fee2e2">🔴</div>
+      Código ROJO
+    </div>
+
+    <div class="highlight" style="background:linear-gradient(135deg,#b91c1c,#7f1d1d);margin-bottom:14px">
+      <h3 style="color:#fca5a5">⚠️ Definición</h3>
+      <p>Situación <strong>urgente</strong> que pone en peligro <strong>inmediato la vida</strong> de un paciente o persona.</p>
+    </div>
+
+    <div class="card rojo" style="margin-bottom:14px">
+      <span class="card-label">Situaciones en FALP</span>
+      <h3>Se considera Código Rojo</h3>
+      <div class="tags">
+        <span class="tag rojo">1. Convulsión</span>
+        <span class="tag rojo">2. Dificultad respiratoria</span>
+        <span class="tag rojo">3. Compromiso de conciencia</span>
+        <span class="tag rojo">4. Hemorragia intensa</span>
+        <span class="tag rojo">5. Paro Cardio-Respiratorio</span>
+      </div>
+    </div>
+
+    <div class="sec-title" style="font-size:1.1rem">
+      <div class="sec-icon" style="background:#fef9c3;font-size:1rem">✅</div>
+      ¿Qué hago frente a un Código Rojo?
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num rojo">1</div>
+        <div><p>Llamar al <strong style="font-size:1.2rem;color:#d63031">📞 5009</strong></p></div>
+      </div>
+      <div class="step">
+        <div class="step-num rojo">2</div>
+        <div><p><strong>Identificarme</strong></p></div>
+      </div>
+      <div class="step">
+        <div class="step-num rojo">3</div>
+        <div><p>Identificar con claridad <strong>la ubicación del suceso</strong></p></div>
+      </div>
+      <div class="step">
+        <div class="step-num rojo">4</div>
+        <div><p>Solicitar <strong>CÓDIGO ROJO</strong></p></div>
+      </div>
+    </div>
+
+    <div class="card celeste" style="margin-top:14px">
+      <span class="card-label">Equipo que responde</span>
+      <h3>¿Quién compone el Código Rojo?</h3>
+      <ul>
+        <li>Médico residente UPC</li>
+        <li>Guardia</li>
+        <li>Enfermera UPC</li>
+        <li>Enfermera / médico del sector donde ocurre el evento</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ═══════════════ ESTERILIZACIÓN ═══════════════ -->
+  <div class="section" id="esterilizacion">
+    <div class="sec-title">
+      <div class="sec-icon" style="background:#dcfce7">🧼</div>
+      Esterilización
+    </div>
+
+    <div class="grid grid-2">
+      <div class="card verde">
+        <span class="card-label">Material sucio</span>
+        <h3>¿Qué se hace primero?</h3>
+        <p>Se <strong>enjuaga con chorro de agua</strong> y se deja en el <strong>área de material sucio</strong>.</p>
+        <p style="margin-top:8px;color:#d63031;font-weight:600">⛔ En 5° piso NO se lava.</p>
+      </div>
+      <div class="card azul">
+        <span class="card-label">¿Dónde se lava?</span>
+        <h3>Central de Esterilización</h3>
+        <p>Todo el material para esterilización se lava en la <strong>Central de Esterilización</strong>.</p>
+      </div>
+    </div>
+
+    <div class="highlight" style="margin-top:14px">
+      <h3>📋 Normas y Protocolos</h3>
+      <p>Se revisan en la plataforma <strong>KAWAK</strong></p>
+    </div>
+
+    <div class="card naranja" style="margin-top:14px">
+      <span class="card-label">Reportes de Incidentes</span>
+      <h3>¿Dónde se reportan?</h3>
+      <p>En la plataforma <strong>LISTPLUS</strong></p>
+    </div>
+  </div>
+
+  <!-- ═══════════════ RECLAMOS ═══════════════ -->
+  <div class="section" id="reclamos">
+    <div class="sec-title">
+      <div class="sec-icon" style="background:#ede9fe">📋</div>
+      Reclamos — 3 Formas
+    </div>
+
+    <div class="highlight" style="margin-bottom:14px">
+      <h3>📌 Debes informar al paciente que existen 3 maneras</h3>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num verde">1</div>
+        <div>
+          <p><strong>Presencial — Horario Hábil</strong></p>
+          <p>Unidad de Servicio al Paciente, <strong>segundo piso</strong>, Torre Norte.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num verde">2</div>
+        <div>
+          <p><strong>Horario Inhábil</strong></p>
+          <p>Formulario en: Imagenología · Consultas ambulatorias · Radioterapia oriente · Centro médico · Estación de enfermería de servicios médico-quirúrgicos.<br>
+          También en <strong>www.falp.org</strong></p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num verde">3</div>
+        <div>
+          <p><strong>Telemedicina</strong></p>
+          <p>Sitio web: <strong>www.institutooncologicofalp.cl</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ IDENTIFICACIÓN PACIENTE ═══════════════ -->
+  <div class="section" id="identificacion">
+    <div class="sec-title">
+      <div class="sec-icon" style="background:#fef9c3">🪪</div>
+      Identificación del Paciente
+    </div>
+
+    <div class="grid grid-2" style="margin-bottom:14px">
+      <div class="card azul">
+        <span class="card-label">Ficha Clínica</span>
+        <h3>¿Qué es?</h3>
+        <ul>
+          <li>Es <strong>única por paciente</strong>, siempre debe estar con él.</li>
+          <li>El <strong>RUT</strong> es el verificador (no el folio).</li>
+        </ul>
+      </div>
+      <div class="card celeste">
+        <span class="card-label">Brazalete — Debe tener</span>
+        <h3>Datos obligatorios</h3>
+        <ul>
+          <li>2 nombres + 2 apellidos</li>
+          <li>RUT o DNI</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="highlight" style="margin-bottom:14px">
+      <h3>💡 Regla SSN / SSA</h3>
+      <ul>
+        <li>Sin 2° nombre → escribir <strong>SSN</strong> (ej: Juan <em>SSN</em> Pérez González)</li>
+        <li>Sin 2° apellido → escribir <strong>SSA</strong> (ej: Juan Luis Pérez <em>SSA</em>)</li>
+      </ul>
+    </div>
+
+    <div class="card naranja">
+      <span class="card-label">Si el brazalete no cabe en la muñeca</span>
+      <h3>¿Qué hacer?</h3>
+      <ul>
+        <li>Unir <strong>dos brazaletes</strong></li>
+        <li>O colocar en <strong>extremidades inferiores</strong></li>
+        <li>Dar aviso a <strong>todas las unidades</strong> implicadas y personal que atiende</li>
+      </ul>
+    </div>
+  </div>
+
+</main>
+
+<footer>Cartilla generada para preparación de Acreditación FALP · 2026</footer>
+
+<script>
+  function showTab(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    event.currentTarget.classList.add('active');
+  }
+
+  // Acordeón QA
+  document.querySelectorAll('.qa-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const a = q.nextElementSibling;
+      const open = a.classList.contains('visible');
+      document.querySelectorAll('.qa-a').forEach(x => x.classList.remove('visible'));
+      document.querySelectorAll('.qa-q').forEach(x => x.classList.remove('open'));
+      if (!open) { a.classList.add('visible'); q.classList.add('open'); }
+    });
+  });
+</script>
+</body>
+</html>
